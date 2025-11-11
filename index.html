@@ -3,28 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MuslimGPT - Cendekiawan Gaul</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🕌</text></svg>">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>YazdangantengGpt By Danz - Super Duper Gaul & Cerdas</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡️</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Montserrat:wght@800&display=swap" rel="stylesheet">
     <style>
-        /* Variabel Warna Baru: Islami Modern */
+        /* Variabel Warna Baru: Neon Gaul & Cerdas */
         :root {
-            --bg-color: #f0f2f5; /* Latar Belakang Cerah */
-            --container-bg-color: #ffffff; /* Container Putih */
-            --border-color: #00796b; /* Hijau Teal */
-            --text-color: #333; /* Teks Gelap */
-            --user-message-bg: #e0f2f1; /* Hijau Mint Muda */
-            --bot-message-bg: #00796b; /* Hijau Teal Tua */
-            --bot-message-text: #fff; /* Teks Bot Putih */
-            --input-bg: #f9f9f9;
-            --send-btn-color: #00bcd4; /* Biru Cyan (Gaul/Enerjik) */
+            --bg-color: #0f0c29; /* Deep Blue/Dark */
+            --container-bg-color: rgba(255, 255, 255, 0.08); /* Glassmorphism Base */
+            --border-color: #00ffff; /* Neon Cyan */
+            --text-color: #f0f0ff; /* Light Text */
+            --user-message-bg: #4a2f77; /* Dark Purple User */
+            --bot-message-bg: #1e3a8a; /* Dark Blue Bot */
+            --bot-message-text: #fff;
+            --input-bg: #1c1836; /* Input Darker */
+            --send-btn-color: #ff00ff; /* Neon Magenta */
             --font-family: 'Poppins', sans-serif;
-            --header-bg: #004d40; /* Hijau Tua untuk Header */
+            --header-bg: #6a11cb; /* Header Gradient Start */
+            --header-end: #2575fc; /* Header Gradient End */
         }
 
         body {
             font-family: var(--font-family);
-            background-color: var(--bg-color);
+            background: var(--bg-color);
             color: var(--text-color);
             display: flex;
             justify-content: center;
@@ -33,6 +34,488 @@
             margin: 0;
             line-height: 1.6;
         }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--input-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--border-color), var(--send-btn-color));
+            border-radius: 10px;
+        }
+
+        .chat-container {
+            width: 90%;
+            max-width: 800px;
+            background: var(--container-bg-color);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 90vh;
+            max-height: 100vh;
+            position: relative;
+        }
+
+        .chat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(90deg, var(--header-bg), var(--header-end));
+            color: #fff;
+            padding: 20px;
+            font-size: 1.2em;
+            font-weight: 600;
+            border-bottom: 3px solid var(--border-color);
+            box-shadow: 0 2px 10px rgba(0, 255, 255, 0.3);
+        }
+
+        .chat-header h1 {
+            margin: 0;
+            font-size: 1.1em;
+            flex-grow: 1;
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+
+        .bot-logo {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            margin-right: 15px;
+            background-color: var(--send-btn-color);
+            padding: 5px;
+            box-shadow: 0 0 15px var(--send-btn-color); 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .new-chat-btn {
+            background-color: var(--send-btn-color);
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s ease, box-shadow 0.3s;
+            box-shadow: 0 0 5px var(--send-btn-color);
+        }
+        
+        .new-chat-btn:hover {
+            background-color: #ff33ff;
+            box-shadow: 0 0 10px #ff33ff;
+        }
+
+        .chat-box {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background-color: #1a1533; /* Darker chat area */
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 12px 18px;
+            border-radius: 18px;
+            line-height: 1.6;
+            word-wrap: break-word;
+            animation: fadeIn 0.5s ease-in-out;
+            white-space: pre-wrap;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .message img {
+            max-width: 100%;
+            border-radius: 12px;
+            margin-top: 10px;
+            display: block;
+            border: 2px solid var(--border-color);
+        }
+        
+        .message pre {
+            background-color: rgba(0, 255, 255, 0.1); /* Neon code bg */
+            border-radius: 8px;
+            padding: 10px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 0.9em;
+            border: 1px solid var(--border-color);
+            color: #00ffff;
+        }
+        
+        strong {
+            font-weight: 700;
+            color: var(--border-color);
+        }
+
+        .user-message {
+            background-color: var(--user-message-bg);
+            color: var(--text-color);
+            align-self: flex-end;
+            margin-left: auto;
+            border-bottom-right-radius: 3px;
+        }
+
+        .bot-message {
+            background-color: var(--bot-message-bg);
+            color: var(--bot-message-text);
+            align-self: flex-start;
+            margin-right: auto;
+            border-bottom-left-radius: 3px;
+        }
+        
+        .input-container {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: var(--input-bg);
+            gap: 10px;
+        }
+
+        .input-container input[type="file"] {
+            display: none;
+        }
+
+        .input-container label {
+            cursor: pointer;
+            padding: 10px;
+            color: var(--border-color);
+            font-size: 1.8em;
+            transition: color 0.3s ease;
+        }
+
+        .input-container label:hover {
+            color: var(--send-btn-color);
+        }
+
+        #user-input {
+            flex-grow: 1;
+            padding: 12px 20px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            border-radius: 24px;
+            font-size: 1em;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        #user-input:focus {
+            border-color: var(--send-btn-color);
+            box-shadow: 0 0 10px var(--send-btn-color);
+        }
+
+        .input-container button {
+            padding: 12px 20px;
+            border: none;
+            background-color: var(--send-btn-color);
+            color: #fff;
+            border-radius: 24px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s, box-shadow 0.3s;
+            box-shadow: 0 0 5px var(--send-btn-color);
+        }
+
+        .input-container button:hover {
+            background-color: #ff33ff;
+            transform: translateY(-1px);
+            box-shadow: 0 0 10px #ff33ff;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Media queries for responsiveness */
+        @media (max-width: 768px) {
+            .chat-container {
+                width: 100%;
+                min-height: 100vh;
+                border-radius: 0;
+                box-shadow: none;
+            }
+
+            .chat-header {
+                font-size: 1.1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <div style="display: flex; align-items: center;">
+                 <span class="bot-logo" style="font-size: 2.2em; line-height: 1; margin-right: 10px; color: #fff;">⚡️</span>
+                 <h1>YazdanGanteng By Danz</h1>
+            </div>
+            <button class="new-chat-btn" onclick="newChat()">START NEW CHAT</button>
+        </div>
+        <div class="chat-box" id="chat-box">
+            <div class="message bot-message">
+                <strong>Wazzup, Bro!</strong> Gue **AmbaGpt By Danz**! AI super duper gaul, cerdas, dan siap ngasih *insight* *gokil*. Mau `chat bebas`, `kirim foto`, atau `bikin gambar/video`? *Let's go!* 🚀
+            </div>
+        </div>
+        <div class="input-container">
+            <input type="file" id="file-input" accept="image/*" title="Kirim Foto" >
+            <label for="file-input" title="Kirim Foto">📸</label> 
+            <label title="Buat Gambar/Video (ketik prompt)">🎨</label> 
+            <input type="text" id="user-input" placeholder="Tanyakan, suruh buat gambar, atau kirim foto..." >
+            <button onclick="sendMessage()">KIRIM</button>
+        </div>
+    </div>
+
+    <script>
+        // *** PENTING: GANTI DENGAN API KEY GEMINI ASLI ANDA ***
+        const API_KEY = "AIzaSyCC20j132H13GQiJ7vdlevXX29WqYRdQc4"; 
+        const API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=' + API_KEY; 
+        
+        let conversationHistory = [];
+
+        // PROMPT KEPRIBADIAN BARU: SUPER DUPER CERDAS & GAUL
+        const gaulCerdasPrompt = "Kamu adalah Yazdanganteng By Danz, sebuah AI canggih (setara Gemini Google) dengan kepribadian super duper gaul, santai, cerdas, dan super pintar. Kamu harus membantu user dalam segala hal, dari analisis foto, kode program, ide konten, dan kamu harus menggunakan bahasa Indonesia gaul, trendi, dan penuh emoji. Selalu pertahankan persona ini. Jawab hanya dengan satu respon komprehensif. Jawab pertanyaan user ini: ";
+        
+        const initialPrompt = "Gue siap ngasih *response* paling *fresh* dan *on point*! Mau bahas apa nih hari ini, Bro? 😉";
+
+        // Fungsi inisialisasi history
+        const initializeChat = () => {
+            const storedHistory = localStorage.getItem('chatHistory_amba');
+            const chatBox = document.getElementById('chat-box');
+
+            if (storedHistory) {
+                conversationHistory = JSON.parse(storedHistory);
+                chatBox.innerHTML = ''; 
+                conversationHistory.forEach(message => {
+                    if (message.role !== "system" && !message.parts[0].text.startsWith("Kamu adalah AmbaGpt By Danz,")) {
+                        addMessageToChat(message.role, message.parts[0].text.replace(gaulCerdasPrompt, ''));
+                    }
+                });
+            } else {
+                conversationHistory = [{
+                    role: "user",
+                    parts: [{ text: gaulCerdasPrompt + "Perkenalkan dirimu dan jelaskan apa yang kamu bisa lakukan." }]
+                }, {
+                    role: "model",
+                    parts: [{ text: "Woiiii ini chatGpt gaul y jadi kalau dia ngomong kasar ame luu,lujangan baper entar nangis lagi😹😹🚀" }]
+                }];
+            }
+             chatBox.scrollTop = chatBox.scrollHeight;
+        };
+
+        function saveChatHistory() {
+            localStorage.setItem('chatHistory_danz', JSON.stringify(conversationHistory));
+        }
+
+        function addMessageToChat(role, messageText, imageSrc = null) {
+            const chatBox = document.getElementById('chat-box');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${role}-message`;
+            
+            if (messageText) {
+                let formattedText = messageText
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                    .replace(/\*(.*?)\*/g, '<em>$1</em>');
+
+                const codeRegex = /```[\s\S]*?```/g;
+                let match;
+                let lastIndex = 0;
+                let htmlContent = '';
+
+                while ((match = codeRegex.exec(formattedText)) !== null) {
+                    htmlContent += formattedText.substring(lastIndex, match.index);
+                    const codeBlock = match[0].replace(/```(.*?)\n/s, '```\n');
+                    htmlContent += `<pre>${codeBlock.replace(/```/g, '').trim()}</pre>`;
+                    lastIndex = match.index + match[0].length;
+                }
+                htmlContent += formattedText.substring(lastIndex);
+
+                messageDiv.innerHTML = htmlContent;
+            }
+            
+            if (imageSrc) {
+                const imgTag = document.createElement('img');
+                imgTag.src = imageSrc;
+                messageDiv.appendChild(imgTag);
+            }
+
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        // Function to clear the chat and start a new conversation
+        function newChat() {
+            if (confirm("temenan kate dek refresh,kok ilang permanen loh")) {
+                localStorage.removeItem('chatHistory_amba');
+                initializeChat(); 
+                addMessageToChat('bot', '<strong>Wazzup, Bro!</strong> Gue **Yazdan**! AI super duper gaul, cerdas, dan siap ngasih *insight* *gokil*. Mau `chat bebas`, `kirim foto`, atau `bikin gambar/video`? *Let\'s go!* 🚀');
+            }
+        }
+
+        async function sendMessage() {
+            if (API_KEY === "AIzaSyCC20j132H13GQiJ7vdlevXX29WqYRdQc4") {
+                alert("Waduh, Bro! Lo harus ganti 'API_KEY' di script dengan kunci Gemini API yang asli biar Yazdan bisa ngomong! 🔑");
+                return;
+            }
+            
+            const userInput = document.getElementById('user-input').value.trim();
+            const fileInput = document.getElementById('file-input');
+            const file = fileInput.files[0];
+            const chatBox = document.getElementById('chat-box');
+
+            if (!userInput && !file) {
+                return;
+            }
+
+            let fileData = null;
+            let parts = [];
+            
+            if (file) {
+                // Proses file
+                fileData = await new Promise((resolve) => {
+                    const reader = new FileReader();
+                    reader.onloadend = () => resolve(reader.result);
+                    reader.readAsDataURL(file);
+                });
+
+                // Tampilkan pesan user (dengan/tanpa gambar)
+                if (file.type.startsWith('image/')) {
+                    addMessageToChat('user', userInput, fileData);
+                } else {
+                    addMessageToChat('user', `**${userInput}**\n\nFile diunggah: *${file.name}* (Gemini API biasanya hanya proses gambar)`);
+                }
+                
+                // Tambahkan data gambar ke parts API
+                parts.push({
+                    "inline_data": {
+                        "mime_type": file.type,
+                        "data": fileData.split(',')[1]
+                    }
+                });
+
+            } else {
+                addMessageToChat('user', userInput);
+            }
+            
+            if (userInput) {
+                parts.push({ text: gaulCerdasPrompt + userInput });
+            }
+
+            // Tambahkan pesan ke history
+            conversationHistory.push({
+                role: "user",
+                parts: parts
+            });
+
+            document.getElementById('user-input').value = '';
+            fileInput.value = null; // Reset file input
+            saveChatHistory();
+            
+            // Logika "Buat Foto/Video" (Simulasi)
+            if (userInput.toLowerCase().startsWith('buat foto ') || userInput.toLowerCase().startsWith('buat gambar ') || userInput.toLowerCase().startsWith('buat video ')) {
+                const isVideo = userInput.toLowerCase().startsWith('buat video ');
+                const prompt = userInput.substring(userInput.indexOf(' ') + 1).trim();
+                
+                let loadingText = isVideo ? 'Sedang rendering video super kece lo nih, Bro... 🎬' : 'Bikin fotonya dulu nih, Bro... Semoga hasilnya kece! ✨';
+                const loadingMessageDiv = document.createElement('div');
+                loadingMessageDiv.className = 'message bot-message loading';
+                loadingMessageDiv.textContent = loadingText;
+                chatBox.appendChild(loadingMessageDiv);
+                chatBox.scrollTop = chatBox.scrollHeight;
+                
+                // --- SIMULASI PEMBUATAN MEDIA ---
+                setTimeout(() => {
+                    loadingMessageDiv.remove();
+                    
+                    if (isVideo) {
+                        addMessageToChat('bot', `**Done, Bro!** Karena ini *video*, gue kasih *link* simulasi ya:\n\nLink Video Lo: [Video Keren lo tentang ${prompt}](https://youtube.com/watch?v=AmbaGptVid)\n\n*Catatan: Ini link simulasi karena gue cuma front-end.* 😎`);
+                    } else {
+                        // Simulasi hasil foto dari Pollinations
+                        const imageUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}`;
+                        addMessageToChat('bot', 'Nih, hasil foto **AI Super Cerdas** yang lo minta! **Cekidot!**', imageUrl);
+                    }
+                    
+                }, 3000); // Tunggu 3 detik untuk simulasi rendering
+
+                return;
+            }
+            
+            // Proses Chat/Analisis Gemini API
+            const requestBody = {
+                contents: conversationHistory
+            };
+
+            const loadingMessageDiv = document.createElement('div');
+            loadingMessageDiv.className = 'message bot-message loading';
+            loadingMessageDiv.textContent = 'AmbaGpt lagi mikir keras nih... Tunggu sebentar ya. 🧠';
+            chatBox.appendChild(loadingMessageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+
+            try {
+                const response = await fetch(API_ENDPOINT, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestBody)
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error.message || 'Respons API gagal total. Cek API Key lo deh.');
+                }
+
+                const data = await response.json();
+                const botResponse = data.candidates[0].content.parts[0].text;
+                
+                addMessageToChat('bot', botResponse);
+                
+                conversationHistory.push({
+                    role: "model",
+                    parts: [{ text: botResponse }]
+                });
+                
+                saveChatHistory();
+
+            } catch (error) {
+                console.error('Error:', error);
+                addMessageToChat('bot', `**Waduh, Error!** ${error.message}. Coba ulangi lagi, Bro!`);
+            } finally {
+                if (loadingMessageDiv) {
+                    loadingMessageDiv.remove();
+                }
+            }
+        }
+
+        document.getElementById('user-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+        
+        // Initialize chat on load
+        window.onload = initializeChat;
+    </script>
+</body>
+</html>
 
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
